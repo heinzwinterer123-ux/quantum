@@ -3,6 +3,18 @@
   --font-sans: 'Inter', sans-serif;
   --color-gold: #dccaaf;
   --color-light: #fdf6eb;
+  --color-dark: #111111;
+  --color-stone: #161513;
+  --color-line: rgba(220, 202, 175, 0.18);
+  --color-line-strong: rgba(220, 202, 175, 0.4);
+
+  --space-section: clamp(5rem, 4rem + 6vw, 10rem);
+  --space-inset: 40px;
+
+  --duration-fast: 200ms;
+  --duration-normal: 500ms;
+  --duration-slow: 900ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -13,6 +25,16 @@
 
 html, body, #root {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -73,6 +95,7 @@ body {
   letter-spacing: 0.05em;
   font-weight: 300;
   justify-self: start;
+  text-decoration: none;
 }
 
 .nav-center {
@@ -87,12 +110,14 @@ body {
   justify-self: end;
 }
 
-.nav-center span, .nav-right span {
+.nav-center a, .nav-right a {
+  color: inherit;
+  text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.nav-center span:hover, .nav-right span:hover {
+.nav-center a:hover, .nav-right a:hover {
   color: var(--color-light);
   opacity: 0.8;
 }
@@ -134,7 +159,7 @@ body {
   left: 40px;
   right: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   z-index: 10;
 }
@@ -177,17 +202,130 @@ body {
   color: var(--color-light);
 }
 
+/* ---------------------------------------------
+   Shared atoms — reused by every section below
+   the hero. Keep the hero's own rules untouched.
+--------------------------------------------- */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.section-index {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--color-line-strong);
+  letter-spacing: 0.05em;
+}
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--color-line);
+  border: none;
+}
+
+.badge-circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 1px solid rgba(203, 178, 135, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-serif);
+  color: var(--color-gold);
+  font-size: 1.4rem;
+  font-weight: 400;
+  background: var(--color-dark);
+  flex-shrink: 0;
+}
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid rgba(220, 202, 175, 0.4);
+  color: var(--color-gold);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-normal) ease;
+}
+
+.btn-pill:hover {
+  background: rgba(220, 202, 175, 0.08);
+  border-color: rgba(220, 202, 175, 0.8);
+  color: var(--color-light);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 768px) {
-  .hero-section {
-    padding: 20px;
+  .hero-header {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  .hero-footer {
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
+    align-items: center;
+  }
+  .hero-main {
+    top: 25vh;
   }
   .hero-title {
-    font-size: 18vw;
-    margin-top: 2rem;
+    font-size: 16vw;
+    margin-top: 1rem;
   }
   .hero-subtitle {
     font-size: 1rem;
     padding: 0 10px;
+    margin-top: 1.5rem;
+  }
+  .hero-cta {
+    font-size: 0.75rem;
+    padding: 12px 24px;
+    border-color: rgba(220, 202, 175, 0.8); /* more apparent border */
+    background: rgba(220, 202, 175, 0.1); /* slightly visible background */
   }
   .nav-center, .nav-right {
     display: none;

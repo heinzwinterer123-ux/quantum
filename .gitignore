@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.DS_Store
+
+# Local Netlify folder
+.netlify
+
+# Raw/unoptimized source photography (not used by the app; optimized versions live in public/images/)
+/QUANTUM*.jpg

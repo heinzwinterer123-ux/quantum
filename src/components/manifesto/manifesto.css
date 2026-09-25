@@ -1,0 +1,39 @@
+.manifesto {
+  background: var(--color-dark);
+  padding: var(--space-section) var(--space-inset);
+}
+
+.manifesto-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-meta {
+  margin-bottom: 2.5rem;
+}
+
+.manifesto-statement {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 1.1rem + 3vw, 3.4rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: rgba(253, 246, 235, 0.55);
+  max-width: 22ch;
+  margin: 0 0 3.5rem;
+}
+
+.manifesto-accent {
+  color: var(--color-light);
+}
+
+@media (max-width: 768px) {
+  .manifesto {
+    padding: var(--space-section) 20px;
+  }
+
+  .manifesto-statement {
+    max-width: none;
+    margin-bottom: 2.5rem;
+  }
+}
